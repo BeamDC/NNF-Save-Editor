@@ -44,6 +44,8 @@ impl eframe::App for Gui {
                 }
             }
             ui.label(self.file_state.to_string());
+            ui.label(format!("{:?}", self.data.perks));
+            ui.label(format!("{:?}", self.data.items));
         });
     }
 }
@@ -60,7 +62,6 @@ impl Gui {
                 self.file_state = FileState::Error(e.to_string());
             }
         }
-        todo!()
 }
 
     pub fn run() -> Result<(), eframe::Error> {

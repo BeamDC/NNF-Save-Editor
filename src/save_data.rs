@@ -1,7 +1,9 @@
 use std::error::Error;
 use std::fmt::{Debug, Display, Formatter};
+use std::fs;
 use std::path::Path;
 use crate::game_data::{Item, Perk};
+use crate::parser::SaveDataParser;
 
 #[derive(Debug)]
 pub enum DataError {
@@ -31,6 +33,8 @@ pub struct SaveData {
 
 impl SaveData {
     pub fn from_path<P: AsRef<Path>>(path: P) -> Result<Self, DataError> {
-        todo!()
+        let bytes = fs::read_to_string(path).unwrap();
+        let raw = bytes.as_str();
+        SaveDataParser::parse(raw)
     }
 }
